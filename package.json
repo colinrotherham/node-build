@@ -12,10 +12,13 @@
   "dependencies": {
     "express": "^4.16.4"
   },
+  "devDependencies": {
+    "npm-audit-resolver": "^1.5.0"
+  },
   "scripts": {
     "prebuild": "rm -Rf ./dist && mkdir ./dist",
     "build": "cp -Rp packag*.json ./src/* ./dist && npm ci --production --prefix ./dist",
-    "prepackage": "npm run build",
+    "prepackage": "npx check-audit && npm run build",
     "package": "tar -czf dist-$npm_package_version.tgz ./dist",
     "start": "cd ./dist && node --experimental-modules server.mjs"
   }
